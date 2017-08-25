@@ -19,7 +19,7 @@
         <property name="successUrl" value="/" />
 
         <!-- 没有权限返回的地址 （拒绝访问路径）-->
-        <property name="unauthorizedUrl" value="/unauth"  />
+        <property name="unauthorizedUrl" value="/404.jsp"  />
 
         <!--<property name="filters">-->
         <!--<map>-->

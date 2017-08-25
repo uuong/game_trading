@@ -22,10 +22,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
+
     @Resource
     private GoodsService goodsService;
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/id={id}", method = RequestMethod.GET)
     public String getId(@PathVariable("id") Integer id, Model model) {
         Goods goods = goodsService.selectById(id);
         model.addAttribute("goods", goods);
@@ -38,19 +39,19 @@ public class GoodsController {
     }
 
     @RequestMapping(path = "/edit", method = RequestMethod.POST)
-    public String post(Goods goods , HttpSession session) {
+    public String post(Goods goods, HttpSession session) {
         User user = (User) session.getAttribute("loginUser");
         goods.setUserId(user.getUserId());
         goodsService.add(goods);
         return "goods_post";
     }
 
-    @RequestMapping(path = "/edit",method = RequestMethod.DELETE)
+    @RequestMapping(path = "/edit", method = RequestMethod.DELETE)
     public String delete(int id) {
         return "goods_item";
     }
 
-    @RequestMapping(path = "/edit",method = RequestMethod.PUT)
+    @RequestMapping(path = "/edit", method = RequestMethod.PUT)
     public String update(Goods goods) {
         return "goods_item";
     }

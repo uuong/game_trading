@@ -6,6 +6,7 @@ import com.sky.pojo.User;
 import com.sky.service.GoodsService;
 import com.sky.service.OrderService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +33,10 @@ public class OrderController {
     GoodsService goodsService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("loginUser");
+
+        model.addAttribute("lists", orderService.selectByUid(user.getUserId()));
         return "order";
     }
 

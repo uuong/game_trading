@@ -10,11 +10,35 @@
 <html>
 <head>
     <title>用户资料</title>
-
     <%@ include file="include/header.jsp" %>
 </head>
 <body>
 <%@ include file="include/top.jsp" %>
+<table class="table">
+    <th>id</th>
+    <th>time</th>
+    <th>amoun</th>
+    <th>gid</th>
+    <c:forEach var="order" items="${lists}">
+
+        <%--${order.sellerId}--%>
+
+        <tr>
+            <td>
+                    ${order.orderId}
+            </td>
+            <td>
+                    ${order.time}
+            </td>
+            <td> ${order.amount}</td>
+
+            <td> ${order.goodsId}</td>
+        </tr>
+
+    </c:forEach>
+
+</table>
+充值
 <form action="order" method="post">
     <input type="number" name="number">
     <input type="submit">

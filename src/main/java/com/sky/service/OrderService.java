@@ -4,11 +4,13 @@ import com.sky.dao.GoodsMapper;
 import com.sky.dao.OrderMapper;
 import com.sky.dao.UserMapper;
 import com.sky.pojo.Order;
+import com.sky.pojo.OrderExample;
 import com.sky.pojo.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,5 +47,12 @@ public class OrderService {
         userMapper.updateAmountByID(bID, balance);
 
         goodsMapper.updateByID(order.getGoodsId(),1);
+    }
+
+    public List<Order> selectByUid(Integer userId) {
+        OrderExample example = new OrderExample();
+        example.createCriteria().andSellerIdEqualTo(userId);
+        example.or().andBuyIdEqualTo(userId);
+       return orderMapper.selectByExample(example);
     }
 }

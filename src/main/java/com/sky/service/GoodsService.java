@@ -3,6 +3,7 @@ package com.sky.service;
 import com.sky.dao.GoodsMapper;
 import com.sky.pojo.Goods;
 import com.sky.pojo.GoodsExample;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ public class GoodsService {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Resource
    private GoodsMapper goodsMapper;
-
+    @CachePut
     public List<Goods> selectAll() {
         GoodsExample example = new GoodsExample();
         example.createCriteria().andStateEqualTo((byte) 0);

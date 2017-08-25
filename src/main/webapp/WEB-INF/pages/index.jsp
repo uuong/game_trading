@@ -32,7 +32,7 @@
                     <td>${goods.areaId}</td>
                     <td>${goods.price}</td>
                     <td>${goods.startTime}</td>
-                    <td><a href="${pageContext.request.contextPath}/goods/${goods.goodsId}">购买</a></td>
+                    <td><a href="${pageContext.request.contextPath}/goods/id=${goods.goodsId}">查看</a></td>
                 </tr>
 
             </c:forEach>

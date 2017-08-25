@@ -1,8 +1,9 @@
 package com.sky.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable{
     private Integer orderId;
 
     private Integer buyId;

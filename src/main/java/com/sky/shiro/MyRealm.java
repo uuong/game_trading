@@ -1,5 +1,7 @@
 package com.sky.shiro;
 
+import com.sky.pojo.User;
+import com.sky.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -7,6 +9,8 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import javax.annotation.Resource;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +20,8 @@ import org.apache.shiro.subject.PrincipalCollection;
  * To change this template use File | Settings | File Templates.
  */
 public class MyRealm extends AuthorizingRealm {
+    @Resource
+    private UserService userService;
     @Override
     protected AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {
         //if (principals == null) {
@@ -67,9 +73,9 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String userId = (String) token.getPrincipal();
-        String password = new String((char[]) token.getCredentials());
-        AuthenticationInfo aInfo = new SimpleAuthenticationInfo(userId, password, getName());
+        String username = (String) token.getPrincipal();
+        User user = userService.selectByUsername(username);
+        AuthenticationInfo aInfo = new SimpleAuthenticationInfo(username, user.getPassword(), getName());
         return aInfo;
     }
 }
